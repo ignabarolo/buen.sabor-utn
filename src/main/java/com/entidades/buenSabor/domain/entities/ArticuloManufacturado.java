@@ -6,7 +6,6 @@ import lombok.experimental.SuperBuilder;
 import org.hibernate.envers.Audited;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -31,22 +30,22 @@ public class ArticuloManufacturado  extends Articulo{
     @Builder.Default
     private Set<ArticuloManufacturadoDetalle> articuloManufacturadoDetalles = new HashSet<>();
 
-    public Boolean hayStock(){
-        Integer cantidad = 0;
-        for (ArticuloManufacturadoDetalle detalle: articuloManufacturadoDetalles) {
-            cantidad = detalle.getCantidad();
-            if (detalle.getArticuloInsumo().getStockActual() < cantidad)
-                return false;
-        }
-        return true;
-    }
-
-    public Double precioCostoCalculado(){
-        Double precioCosto = 0.0;
-        for (ArticuloManufacturadoDetalle detalle : articuloManufacturadoDetalles ){
-            precioCosto += detalle.getArticuloInsumo().getPrecioCompra();
-        }
-        return precioCosto;
-    }
+//    public Boolean hayStock(){
+//        Integer cantidad = 0;
+//        for (ArticuloManufacturadoDetalle detalle: articuloManufacturadoDetalles) {
+//            cantidad = detalle.getCantidad();
+//            if (detalle.getArticuloInsumo().getStockActual() < cantidad)
+//                return false;
+//        }
+//        return true;
+//    }
+//
+//    public Double precioCostoCalculado(){
+//        Double precioCosto = 0.0;
+//        for (ArticuloManufacturadoDetalle detalle : articuloManufacturadoDetalles ){
+//            precioCosto += detalle.getArticuloInsumo().getPrecioCompra();
+//        }
+//        return precioCosto;
+//    }
 
 }

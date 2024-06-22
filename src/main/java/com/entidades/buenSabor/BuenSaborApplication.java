@@ -227,8 +227,14 @@ public class BuenSaborApplication {
 					.esInsumo(true)
 					.build();
 
+			Categoria categoriaHamburguesas = Categoria.builder()
+					.denominacion("Hamburguesas")
+					.esInsumo(false)
+					.build();
+
 			// Grabo la categoría de insumos y de Manufacturados
 			categoriaRepository.save(categoriaPizzas);
+			categoriaRepository.save(categoriaHamburguesas);
 			categoriaRepository.save(categoriaInsumos);
 			// Asigno subCategorías
 
@@ -284,10 +290,11 @@ public class BuenSaborApplication {
 					stockMaximo(50).
 					precioCompra(50.0).
 					precioVenta(70.0).
+					categoria(categoriaGaseosas).
 					build();
-			ArticuloInsumo harina = ArticuloInsumo.builder().denominacion("Harina").unidadMedida(unidadMedidaGramos).esParaElaborar(true).stockActual(4).stockMaximo(40).precioCompra(40.0).precioVenta(60.5).build();
-			ArticuloInsumo queso = ArticuloInsumo.builder().denominacion("Queso").unidadMedida(unidadMedidaGramos).esParaElaborar(true).stockActual(20).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).build();
-			ArticuloInsumo tomate = ArticuloInsumo.builder().denominacion("Tomate").unidadMedida(unidadMedidaCantidad).esParaElaborar(true).stockActual(20).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).build();
+			ArticuloInsumo harina = ArticuloInsumo.builder().denominacion("Harina").categoria(categoriaInsumos).unidadMedida(unidadMedidaGramos).esParaElaborar(true).stockActual(4).stockMaximo(40).precioCompra(40.0).precioVenta(60.5).build();
+			ArticuloInsumo queso = ArticuloInsumo.builder().denominacion("Queso").categoria(categoriaInsumos).unidadMedida(unidadMedidaGramos).esParaElaborar(true).stockActual(20).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).build();
+			ArticuloInsumo tomate = ArticuloInsumo.builder().denominacion("Tomate").categoria(categoriaInsumos).unidadMedida(unidadMedidaCantidad).esParaElaborar(true).stockActual(20).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).build();
 
 			articuloInsumoRepository.save(cocaCola);
 			articuloInsumoRepository.save(harina);
@@ -300,11 +307,11 @@ public class BuenSaborApplication {
 					denominacion("Pizza Muzarella").
 					descripcion("Una pizza clasica").
 					unidadMedida(unidadMedidaPorciones).
-					precioVenta(130.0).
+					precioVenta(8000.0).
 					tiempoEstimadoMinutos(15).
 					preparacion("Pasos de preparacion de una muzza de toda la vida").
 					build();
-			ArticuloManufacturado pizzaNapolitana = ArticuloManufacturado.builder().denominacion("Pizza Muzarella").descripcion("Una pizza clasica").unidadMedida(unidadMedidaPorciones).precioVenta(150.0).tiempoEstimadoMinutos(15).preparacion("Pasos de preparacion de una pizza napolitana italiana").build();
+			ArticuloManufacturado pizzaNapolitana = ArticuloManufacturado.builder().denominacion("Pizza Napolitana").descripcion("Una pizza napolitana").unidadMedida(unidadMedidaPorciones).precioVenta(10000.0).tiempoEstimadoMinutos(20).preparacion("Pasos de preparacion de una pizza napolitana").build();
 
 			articuloManufacturadoRepository.save(pizzaMuzarella);
 			articuloManufacturadoRepository.save(pizzaNapolitana);

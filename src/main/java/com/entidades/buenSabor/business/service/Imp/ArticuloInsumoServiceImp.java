@@ -3,7 +3,6 @@ package com.entidades.buenSabor.business.service.Imp;
 import com.entidades.buenSabor.MyException.RestrictDeleteException;
 import com.entidades.buenSabor.business.service.ArticuloInsumoService;
 import com.entidades.buenSabor.business.service.Base.BaseServiceImp;
-import com.entidades.buenSabor.business.service.CloudinaryService;
 import com.entidades.buenSabor.domain.entities.ArticuloInsumo;
 import com.entidades.buenSabor.domain.entities.ArticuloManufacturadoDetalle;
 import com.entidades.buenSabor.domain.entities.ImagenArticulo;
@@ -26,8 +25,8 @@ public class ArticuloInsumoServiceImp extends BaseServiceImp<ArticuloInsumo, Lon
     @Autowired
     ImagenArticuloRepository imagenArticuloRepository;
 
-    @Autowired
-    private CloudinaryService cloudinaryService; // Servicio para interactuar con Cloudinary
+//    @Autowired
+//    private CloudinaryService cloudinaryService; // Servicio para interactuar con Cloudinary
 
 
     @Override
@@ -96,7 +95,7 @@ public class ArticuloInsumoServiceImp extends BaseServiceImp<ArticuloInsumo, Lon
                 // Crear una entidad Image y establecer su nombre y URL (subida a Cloudinary)
                 ImagenArticulo image = new ImagenArticulo();
                 image.setName(file.getOriginalFilename()); // Establecer el nombre del archivo original
-                image.setUrl(cloudinaryService.uploadFile(file)); // Subir el archivo a Cloudinary y obtener la URL
+//                image.setUrl(cloudinaryService.uploadFile(file)); // Subir el archivo a Cloudinary y obtener la URL
 
                 // Verificar si la URL de la imagen es nula (indicativo de fallo en la subida)
                 if (image.getUrl() == null) {
@@ -132,8 +131,8 @@ public class ArticuloInsumoServiceImp extends BaseServiceImp<ArticuloInsumo, Lon
             imagenArticuloRepository.deleteById(id);
 
             // Llamar al servicio de Cloudinary para eliminar la imagen por su publicId
-            return cloudinaryService.deleteImage(publicId, id);
-
+//            return cloudinaryService.deleteImage(publicId, id);
+        return new ResponseEntity<>("", HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             // Devolver un error (400) si ocurre alguna excepción durante la eliminación

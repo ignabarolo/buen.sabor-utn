@@ -1,12 +1,9 @@
 package com.entidades.buenSabor.business.service.Imp;
 
 import com.entidades.buenSabor.business.service.Base.BaseServiceImp;
-import com.entidades.buenSabor.business.service.CloudinaryService;
 import com.entidades.buenSabor.business.service.EmpresaService;
 
-import com.entidades.buenSabor.business.service.SucursalService;
 import com.entidades.buenSabor.domain.entities.Empresa;
-import com.entidades.buenSabor.domain.entities.ImagenArticulo;
 import com.entidades.buenSabor.domain.entities.ImagenEmpresa;
 import com.entidades.buenSabor.domain.entities.Sucursal;
 import com.entidades.buenSabor.repositories.EmpresaRepository;
@@ -23,8 +20,6 @@ import java.util.stream.Collectors;
 @Service
 public class EmpresaServiceImpl extends BaseServiceImp<Empresa,Long> implements EmpresaService {
 
-    @Autowired
-    CloudinaryService cloudinaryService;
     @Autowired
     ImagenEmpresaRepository imagenEmpresaRepository;
     @Autowired
@@ -92,7 +87,7 @@ public class EmpresaServiceImpl extends BaseServiceImp<Empresa,Long> implements 
                 // Crear una entidad Image y establecer su nombre y URL (subida a Cloudinary)
                 ImagenEmpresa image = new ImagenEmpresa();
                 image.setName(file.getOriginalFilename()); // Establecer el nombre del archivo original
-                image.setUrl(cloudinaryService.uploadFile(file)); // Subir el archivo a Cloudinary y obtener la URL
+//                image.setUrl(cloudinaryService.uploadFile(file)); // Subir el archivo a Cloudinary y obtener la URL
 
                 // Verificar si la URL de la imagen es nula (indicativo de fallo en la subida)
                 if (image.getUrl() == null) {
@@ -128,7 +123,7 @@ public class EmpresaServiceImpl extends BaseServiceImp<Empresa,Long> implements 
             imagenEmpresaRepository.deleteById(id);
 
             // Llamar al servicio de Cloudinary para eliminar la imagen por su publicId
-            return cloudinaryService.deleteImage(publicId, id);
+            return new ResponseEntity<>("", HttpStatus.OK);
 
         } catch (Exception e) {
             e.printStackTrace();

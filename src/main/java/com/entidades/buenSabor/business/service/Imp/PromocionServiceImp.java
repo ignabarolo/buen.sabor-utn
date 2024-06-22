@@ -1,7 +1,6 @@
 package com.entidades.buenSabor.business.service.Imp;
 
 import com.entidades.buenSabor.business.service.Base.BaseServiceImp;
-import com.entidades.buenSabor.business.service.CloudinaryService;
 import com.entidades.buenSabor.business.service.PromocionService;
 import com.entidades.buenSabor.business.service.SucursalService;
 import com.entidades.buenSabor.domain.entities.ImagenArticulo;
@@ -27,9 +26,6 @@ public class PromocionServiceImp extends BaseServiceImp<Promocion, Long> impleme
 
     @Autowired
     SucursalService sucursalService;
-
-    @Autowired
-    CloudinaryService cloudinaryService;
 
     @Autowired
     ImagenArticuloRepository imagenArticuloRepository;
@@ -102,7 +98,6 @@ public class PromocionServiceImp extends BaseServiceImp<Promocion, Long> impleme
                 // Crear una entidad Image y establecer su nombre y URL (subida a Cloudinary)
                 ImagenArticulo image = new ImagenArticulo();
                 image.setName(file.getOriginalFilename()); // Establecer el nombre del archivo original
-                image.setUrl(cloudinaryService.uploadFile(file)); // Subir el archivo a Cloudinary y obtener la URL
 
                 // Verificar si la URL de la imagen es nula (indicativo de fallo en la subida)
                 if (image.getUrl() == null) {
@@ -138,7 +133,7 @@ public class PromocionServiceImp extends BaseServiceImp<Promocion, Long> impleme
             imagenArticuloRepository.deleteById(id);
 
             // Llamar al servicio de Cloudinary para eliminar la imagen por su publicId
-            return cloudinaryService.deleteImage(publicId, id);
+            return new ResponseEntity<>("", HttpStatus.OK);
 
         } catch (Exception e) {
             e.printStackTrace();

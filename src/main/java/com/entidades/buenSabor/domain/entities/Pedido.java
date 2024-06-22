@@ -51,7 +51,7 @@ public class Pedido extends Base{
     @JoinColumn(name = "pedido_id")
     //SE AGREGA EL BUILDER.DEFAULT PARA QUE BUILDER NO SOBREESCRIBA LA INICIALIZACION DE LA LISTA
     @Builder.Default
-    private Set<DetallePedido> detallePedidos = new HashSet<>();
+    private Set<DetallePedido> detallePedido = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "empleado_id")

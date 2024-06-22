@@ -1,13 +1,10 @@
 package com.entidades.buenSabor.domain.dto.PedidoDto;
 
-import com.entidades.buenSabor.domain.dto.BaseDto;
-import com.entidades.buenSabor.domain.dto.Sucursal.ShortSucursal;
-import com.entidades.buenSabor.domain.dto.Sucursal.SucursalDto;
-import com.entidades.buenSabor.domain.entities.DetallePedido;
+import com.entidades.buenSabor.domain.dto.PedidoDetalle.PedidoDetalleDto;
+import com.entidades.buenSabor.domain.entities.ArticuloManufacturado;
 import com.entidades.buenSabor.domain.enums.Estado;
 import com.entidades.buenSabor.domain.enums.FormaPago;
 import com.entidades.buenSabor.domain.enums.TipoEnvio;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,17 +18,16 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PedidoDto extends BaseDto {
-
-    @Schema(type = "string", format = "time", pattern = "HH:mm:ss", description = "Horario de apertura en formato HH:mm:ss")
+public class PedidoCreateTransferDto {//este va en el post
     private LocalTime horaEstimadaFinalizacion;
     private Double total;
     private Double totalCosto;
     private Estado estado;
     private TipoEnvio tipoEnvio;
     private FormaPago formaPago;
-    private LocalDate fechaPedido;
-//    private List<DetallePedido> detallePedido;
+    private List<PedidoDetalleDto> detallePedido;
 
-    private ShortSucursal sucursal;
+    private LocalDate fechaPedido;
+
+    private Long idSucursal;
 }
